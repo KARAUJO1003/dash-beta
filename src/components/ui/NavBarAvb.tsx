@@ -95,13 +95,13 @@ const NavBarLink = ({
   <Link
     href={href}
     className={cn(
-      "flex items-center p-2 text-sm rounded-md text-avb-green-100 transition-all hover:bg-avb-green-400/20",
+      "flex items-center p-2 text-sm rounded-md text-avb-green-100",
       className
     )}
     {...props}
   >
     {Icon && <Icon className="size-4" />}
-    {children}
+    <span className="line-clamp-1">{children}</span>
   </Link>
 );
 

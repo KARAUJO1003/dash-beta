@@ -1,7 +1,8 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/ButtonAvb";
-import { ArrowLeft, MoonIcon, Undo2 } from "lucide-react";
+import { ArrowLeft, MoonIcon, SunIcon, Undo2 } from "lucide-react";
 import { useTheme } from "next-themes";
 import { usePathname, useRouter } from "next/navigation";
 import { Suspense } from "react";
@@ -11,12 +12,18 @@ export const PagesHeader = () => {
   const router = useRouter();
   const { theme, setTheme } = useTheme();
 
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const toggleTheme = () => {
     return theme === "dark" ? setTheme("light") : setTheme("dark");
   };
 
   return (
-    <header className="sticky top-0">
+    <header className="sticky top-0 z-10">
       <div className="min-h-14 flex items-center justify-between px-10 ">
         <Suspense>
           <div className="flex items-center gap-1 text-avb-green-600">
@@ -32,7 +39,11 @@ export const PagesHeader = () => {
         </Suspense>
         <div className="flex items-center gap-3">
           <Button onClick={toggleTheme} variant="ghost" size="icon">
-            <MoonIcon className="size-4" />
+            {mounted && theme === "dark" ? (
+              <SunIcon className="size-4" />
+            ) : (
+              mounted && <MoonIcon className="size-4" />
+            )}
           </Button>
         </div>
       </div>

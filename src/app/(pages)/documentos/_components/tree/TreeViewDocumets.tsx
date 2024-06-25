@@ -25,7 +25,15 @@ const TreeView: React.FC<TreeViewProps> = ({ node }) => {
       </Button>
 
       {node?.children && (
-        <TreeNodeChildren isOpen={isOpenFolder} children={node?.children} />
+        <div
+          className={`overflow-hidden transition-all duration-600 ${
+            !isOpenFolder
+              ? "-translate-y-9  opacity-0"
+              : "translate-y-0 opacity-100"
+          }`}
+        >
+          <TreeNodeChildren isOpen={isOpenFolder} children={node?.children} />
+        </div>
       )}
     </main>
   );

@@ -1,6 +1,8 @@
 "use client";
 import { ComponentProps, useEffect, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import BACKGROUND_IMAGE from "@/assets/avbBackground.jpg";
+
 import {
   ActivityIcon,
   BarChartIcon,
@@ -20,6 +22,7 @@ import {
   TargetIcon,
   ThermometerIcon,
   User,
+  Coins,
 } from "lucide-react";
 import { Button } from "./ui/ButtonAvb";
 import LOGOAVBHORIZONTAL from "@/assets/horizontal-logo.png";
@@ -30,12 +33,14 @@ import {
   NavBarHeader,
   NavBarLink,
 } from "./ui/NavBarAvb";
+import Image from "next/image";
 
 export const menuItems = [
   { name: "Página Inicial", href: "/", icon: HomeIcon },
   { name: "Balanço de Massa", href: "/balanco-de-massa", icon: CalculatorIcon },
   { name: "Documentos", href: "/documentos", icon: FileTextIcon },
   { name: "Gestão de Metas", href: "/gestao-de-metas", icon: TargetIcon },
+  { name: "Gestão de Custos", href: "/gestao-custos", icon: Coins },
   { name: "Indicadores", href: "/indicadores", icon: BarChartIcon },
   { name: "Materiais / MRP", href: "/materiais-mrp", icon: BoxIcon },
   { name: "Monitoramento", href: "/monitoramento", icon: MonitorIcon },
@@ -115,11 +120,13 @@ export const SideBarAvb = ({ children, ...props }: ComponentProps<"div">) => {
 
     return (
       <>
-        <div className="flex items-center w-full justify-between">
+        <div
+          className={`flex items-center w-full justify-between rounded-md transition-all hover:bg-avb-green-700/20 ${isActiveLink(item.href) && "bg-avb-green-700 text-white"}`}
+        >
           <NavBarLink
             Icon={item.icon}
             href={getLinkWithAside(item.href)}
-            className={`w-full justify-bete ${isActiveLink(item.href) && "bg-avb-green-700/60 text-white"} ${sidebar === "closed" && " justify-center"} `}
+            className={`w-full  ${sidebar === "closed" && " justify-center"} `}
           >
             <span className={`ms-3 ${sidebar === "closed" && "hidden"}`}>
               {item.name}
@@ -158,13 +165,13 @@ export const SideBarAvb = ({ children, ...props }: ComponentProps<"div">) => {
 
   return (
     <main
-      className={`flex  w-full md:grid max-sm:hidden ${sidebar === "open" ? "md:grid-cols-[14rem_1fr] transition-all" : "md:grid-cols-[4rem_1fr] transition-all"}`}
+      className={` max-md:hidden md:grid ${sidebar === "open" ? "md:grid-cols-[14rem_1fr] transition-all" : "md:grid-cols-[4rem_1fr] transition-all"}`}
     >
-      <div className="relative">
+      <div className="relative z-20">
         <Button
           size="icon"
           variant="link"
-          className={`backdrop-blur-lg bg-avb-green-400/90 rounded-full text-avb-green-100 absolute top-5 -right-3 z-10 size-6 transition-all`}
+          className={`backdrop-blur-lg bg-avb-green-500/90 rounded-full text-avb-green-100 absolute top-5 -right-3 z-10 size-6 transition-all`}
           onClick={setUrlModal}
         >
           {sidebar === "open" && <ChevronLeft className="size-4" />}
@@ -210,7 +217,7 @@ export const SideBarAvb = ({ children, ...props }: ComponentProps<"div">) => {
         </NavBar>
       </div>
 
-      <div className="overflow-y-auto h-screen bg-background">{children}</div>
+      <div className="relative overflow-y-auto h-screen ">{children}</div>
     </main>
   );
 };

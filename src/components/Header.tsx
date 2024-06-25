@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/ButtonAvb";
 import { ArrowLeft, MoonIcon, SunIcon, Undo2 } from "lucide-react";
 import { useTheme } from "next-themes";
@@ -10,6 +11,12 @@ export const PagesHeader = () => {
   const pathname = usePathname();
   const router = useRouter();
   const { theme, setTheme } = useTheme();
+
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const toggleTheme = () => {
     return theme === "dark" ? setTheme("light") : setTheme("dark");
@@ -32,10 +39,10 @@ export const PagesHeader = () => {
         </Suspense>
         <div className="flex items-center gap-3">
           <Button onClick={toggleTheme} variant="ghost" size="icon">
-            {theme && theme === "dark" ? (
+            {mounted && theme === "dark" ? (
               <SunIcon className="size-4" />
             ) : (
-              <MoonIcon className="size-4" />
+              mounted && <MoonIcon className="size-4" />
             )}
           </Button>
         </div>

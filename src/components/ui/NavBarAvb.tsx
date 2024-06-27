@@ -1,11 +1,9 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
-import { Button } from "./ButtonAvb";
-import { ChevronLeft, ChevronRight, LucideIcon } from "lucide-react";
+import { LucideIcon } from "lucide-react";
 import Link, { LinkProps } from "next/link";
 import Image, { StaticImageData } from "next/image";
-import { tv } from "tailwind-variants";
 
 type NavBarProps = {
   sidebar?: string | null;
@@ -19,7 +17,7 @@ const NavBar = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "relative h-screen bg-avb-green-500 overflow-hidden max-md:hidden",
+      "relative h-screen bg-avb-green-500 rounded-r-md shadow overflow-hidden max-md:hidden",
       className
     )}
     {...props}
@@ -95,13 +93,13 @@ const NavBarLink = ({
   <Link
     href={href}
     className={cn(
-      "flex items-center p-2 text-sm rounded-md text-avb-green-100 transition-all hover:bg-avb-green-400/20",
+      "flex items-center p-2 text-sm rounded-md text-avb-green-100",
       className
     )}
     {...props}
   >
     {Icon && <Icon className="size-4" />}
-    {children}
+    <span className="line-clamp-1">{children}</span>
   </Link>
 );
 

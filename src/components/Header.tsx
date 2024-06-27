@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/ButtonAvb";
-import { ArrowLeft, MoonIcon, Undo2 } from "lucide-react";
+import { ArrowLeft, SunIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 import { usePathname, useRouter } from "next/navigation";
 import { Suspense } from "react";
@@ -16,7 +16,7 @@ export const PagesHeader = () => {
   };
 
   return (
-    <header className="sticky top-0">
+    <header className="sticky top-0 z-10">
       <div className="min-h-14 flex items-center justify-between px-10 ">
         <Suspense>
           <div className="flex items-center gap-1 text-avb-green-600">
@@ -32,7 +32,7 @@ export const PagesHeader = () => {
         </Suspense>
         <div className="flex items-center gap-3">
           <Button onClick={toggleTheme} variant="ghost" size="icon">
-            <MoonIcon className="size-4" />
+            <SunIcon className="size-4" />
           </Button>
         </div>
       </div>
